@@ -24,9 +24,22 @@ Bonnate 공개 서버 `https://lb.bonnate.com/v1`의 이미지 생성만 쓰는 
 | `cloudflare/@cf/leonardo/lucid-origin` | 없음 |
 | `cloudflare/@cf/leonardo/phoenix-1.0` | 없음 |
 
-## 실행
+## 명령줄로 바로 생성
 
-stdio MCP입니다. 포트를 열지 않고, 클라이언트가 Python으로 이 파일을 실행합니다. 표준 라이브러리만 씁니다.
+Python 표준 라이브러리만 씁니다. 별도 설치가 없습니다.
+
+```text
+python image_generation_mcp.py models
+python image_generation_mcp.py generate "a ceramic mug on a wooden desk" --size 512x512
+python image_generation_mcp.py generate "same mug, but blue" --image ref.jpg
+python image_generation_mcp.py generate "a castle" --model cloudflare/@cf/leonardo/phoenix-1.0 --out-dir C:\out
+```
+
+옵션은 `--model`, `--size`, `--steps`, `--strength`, `--seed`, `--image`(여러 번 가능), `--out-dir`입니다. 생성된 파일 경로를 출력합니다.
+
+## MCP로 실행
+
+인자 없이 실행하면 stdio MCP 서버로 뜹니다. 도구는 `list_image_models`, `generate_image` 두 개입니다. 주소와 키 위치는 기본값이 있어서 환경변수 없이 등록해도 됩니다.
 
 ## OpenCode
 
@@ -44,9 +57,6 @@ command = "python"
 args = ["C:\\path\\to\\ai-lb-image-mcp\\image_generation_mcp.py"]
 tool_timeout_sec = 180.0
 
-[mcp_servers.ai-lb-images.env]
-AI_LB_BASE_URL = "https://lb.bonnate.com/v1"
-AI_LB_API_KEY_FILE = "C:\\path\\to\\ai-lb-image-mcp\\api-key"
 ```
 
 ## Claude Code
@@ -58,10 +68,6 @@ AI_LB_API_KEY_FILE = "C:\\path\\to\\ai-lb-image-mcp\\api-key"
   "type": "stdio",
   "command": "python",
   "args": ["C:\\path\\to\\ai-lb-image-mcp\\image_generation_mcp.py"],
-  "timeout": 180000,
-  "env": {
-    "AI_LB_BASE_URL": "https://lb.bonnate.com/v1",
-    "AI_LB_API_KEY_FILE": "C:\\path\\to\\ai-lb-image-mcp\\api-key"
-  }
+  "timeout": 180000
 }
 ```

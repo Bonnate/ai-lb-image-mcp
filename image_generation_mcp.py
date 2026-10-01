@@ -296,7 +296,50 @@ def main() -> None:
             _write_message(response)
 
 
+def cli(argv: list[str]) -> int:
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Generate images through the Bonnate AI LB.")
+    commands = parser.add_subparsers(dest="command", required=True)
+    commands.add_parser("models", help="List image models")
+    generate = commands.add_parser("generate", help="Generate an image and save it locally")
+    generate.add_argument("prompt")
+    generate.add_argument("--model", default=DEFAULT_MODEL)
+    generate.add_argument("--size", help="Width x height, for example 512x512")
+    generate.add_argument("--steps", type=int)
+    generate.add_argument("--strength", type=float)
+    generate.add_argument("--seed", type=int)
+    generate.add_argument("--image", action="append", default=[], help="Reference image path, repeatable")
+    generate.add_argument("--out-dir", help="Directory to save into")
+    args = parser.parse_args(argv)
+
+    try:
+        if args.command == "models":
+            print(list_image_models())
+            return 0
+        if args.out_dir:
+            os.environ["AI_LB_IMAGE_DIR"] = args.out_dir
+        text, _image_bytes, _mime = generate_image(
+            {
+                "prompt": args.prompt,
+                "model": args.model,
+                "size": args.size,
+                "steps": args.steps,
+                "strength": args.strength,
+                "seed": args.seed,
+                "image_paths": args.image,
+            }
+        )
+        print(text)
+        return 0
+    except Exception as exc:
+        print(exc, file=sys.stderr)
+        return 1
+
+
 if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        sys.exit(cli(sys.argv[1:]))
     try:
         main()
     except BrokenPipeError:
