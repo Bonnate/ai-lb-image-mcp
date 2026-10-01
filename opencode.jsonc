@@ -1,0 +1,104 @@
+{
+    "$schema": "https://opencode.ai/config.json",
+    "provider": {
+        "ai-lb-bonnate-images": {
+            "name": "AILB Images",
+            "npm": "@ai-sdk/openai-compatible",
+            "options": {
+                "baseURL": "https://lb.bonnate.com/v1",
+                "apiKey": "{file:./api-key}"
+            },
+            "models": {
+                "cloudflare/@cf/black-forest-labs/flux-2-klein-4b": {
+                    "name": "cloudflare/@cf/black-forest-labs/flux-2-klein-4b",
+                    "reasoning": false,
+                    "tool_call": false,
+                    "modalities": {
+                        "input": ["text", "image"],
+                        "output": ["image"]
+                    }
+                },
+                "cloudflare/@cf/black-forest-labs/flux-2-klein-9b": {
+                    "name": "cloudflare/@cf/black-forest-labs/flux-2-klein-9b",
+                    "reasoning": false,
+                    "tool_call": false,
+                    "modalities": {
+                        "input": ["text", "image"],
+                        "output": ["image"]
+                    }
+                },
+                "cloudflare/@cf/black-forest-labs/flux-2-dev": {
+                    "name": "cloudflare/@cf/black-forest-labs/flux-2-dev",
+                    "reasoning": false,
+                    "tool_call": false,
+                    "modalities": {
+                        "input": ["text", "image"],
+                        "output": ["image"]
+                    }
+                },
+                "cloudflare/@cf/bytedance/stable-diffusion-xl-lightning": {
+                    "name": "cloudflare/@cf/bytedance/stable-diffusion-xl-lightning",
+                    "reasoning": false,
+                    "tool_call": false,
+                    "modalities": {
+                        "input": ["text", "image"],
+                        "output": ["image"]
+                    }
+                },
+                "cloudflare/@cf/stabilityai/stable-diffusion-xl-base-1.0": {
+                    "name": "cloudflare/@cf/stabilityai/stable-diffusion-xl-base-1.0",
+                    "reasoning": false,
+                    "tool_call": false,
+                    "modalities": {
+                        "input": ["text", "image"],
+                        "output": ["image"]
+                    }
+                },
+                "cloudflare/@cf/lykon/dreamshaper-8-lcm": {
+                    "name": "cloudflare/@cf/lykon/dreamshaper-8-lcm",
+                    "reasoning": false,
+                    "tool_call": false,
+                    "modalities": {
+                        "input": ["text", "image"],
+                        "output": ["image"]
+                    }
+                },
+                "cloudflare/@cf/black-forest-labs/flux-1-schnell": {
+                    "name": "cloudflare/@cf/black-forest-labs/flux-1-schnell",
+                    "reasoning": false,
+                    "tool_call": false,
+                    "modalities": {
+                        "input": ["text"],
+                        "output": ["image"]
+                    }
+                },
+                "cloudflare/@cf/leonardo/lucid-origin": {
+                    "name": "cloudflare/@cf/leonardo/lucid-origin",
+                    "reasoning": false,
+                    "tool_call": false,
+                    "modalities": {
+                        "input": ["text"],
+                        "output": ["image"]
+                    }
+                },
+                "cloudflare/@cf/leonardo/phoenix-1.0": {
+                    "name": "cloudflare/@cf/leonardo/phoenix-1.0",
+                    "reasoning": false,
+                    "tool_call": false,
+                    "modalities": {
+                        "input": ["text"],
+                        "output": ["image"]
+                    }
+                }
+            }
+        }
+    },
+    "mcp": {
+        "ai-lb-images": {
+            "type": "local",
+            "command": ["python", "./image_generation_mcp.py"],
+            "timeout": 180000,
+            "enabled": true
+        }
+    }
+}
