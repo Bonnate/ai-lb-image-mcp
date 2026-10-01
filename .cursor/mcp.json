@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "ai-lb-images": {
+      "command": "python",
+      "args": ["image_generation_mcp.py"]
+    }
+  }
+}

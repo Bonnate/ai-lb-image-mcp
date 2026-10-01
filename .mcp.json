@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "ai-lb-images": {
+      "type": "stdio",
+      "command": "python",
+      "args": ["${CLAUDE_PROJECT_DIR:-.}/image_generation_mcp.py"],
+      "timeout": 180000
+    }
+  }
+}

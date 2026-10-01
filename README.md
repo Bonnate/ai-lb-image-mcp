@@ -47,27 +47,11 @@ python image_generation_mcp.py generate "a castle" --model cloudflare/@cf/leonar
 
 채팅에서 이미지 모델을 고르면 서버가 400을 돌려줍니다. 이미지는 MCP의 `generate_image` 도구로 만듭니다.
 
-## Codex
+## 에이전트
 
-`~/.codex/config.toml`
+클론한 폴더에 각 에이전트 설정이 들어 있습니다. 모델이나 사용법을 바꾸면 `AGENTS.md`의 목록을 같은 변경에서 모두 맞춥니다.
 
-```toml
-[mcp_servers.ai-lb-images]
-command = "python"
-args = ["C:\\path\\to\\ai-lb-image-mcp\\image_generation_mcp.py"]
-tool_timeout_sec = 180.0
-
-```
-
-## Claude Code
-
-`~/.claude.json`의 최상위 `mcpServers`입니다.
-
-```json
-"ai-lb-images": {
-  "type": "stdio",
-  "command": "python",
-  "args": ["C:\\path\\to\\ai-lb-image-mcp\\image_generation_mcp.py"],
-  "timeout": 180000
-}
-```
+- OpenCode: `opencode.jsonc`
+- Claude Code: `.mcp.json`, `.claude/skills/ai-lb-images/SKILL.md`
+- Codex: `.codex/config.toml`, `.agents/skills/ai-lb-images/SKILL.md`
+- Cursor: `.cursor/mcp.json`, `.cursor/skills/ai-lb-images/SKILL.md`

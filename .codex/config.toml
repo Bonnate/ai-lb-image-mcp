@@ -1,0 +1,5 @@
+[mcp_servers.ai-lb-images]
+command = "python"
+args = ["image_generation_mcp.py"]
+startup_timeout_sec = 30.0
+tool_timeout_sec = 180.0
